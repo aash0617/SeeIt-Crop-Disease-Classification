@@ -180,23 +180,7 @@ SeeIt-Crop-Disease-Classification/
 
 ---
 
-# 📌 Current Progress
 
-The repository currently includes:
-
-- ✅ Project repository setup
-- ✅ Project architecture
-- ✅ Design documentation
-- ✅ Dataset verification
-- ✅ Dataset exploration
-- ✅ Image preprocessing pipeline
-- ✅ Image augmentation
-- ✅ PyTorch Dataset creation
-- ✅ DataLoader implementation
-
-The remaining modules will be developed and integrated as the project progresses.
-
----
 
 # 🧠 Deep Learning Approach
 
