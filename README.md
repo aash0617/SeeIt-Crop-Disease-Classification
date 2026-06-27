@@ -244,4 +244,3 @@ Lovely Professional University
 
 ---
 
-## ⭐ If you found this project interesting, consider giving it a Star!
