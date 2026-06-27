@@ -1,38 +1,39 @@
 # 🌿 SeeIt – Crop Leaf Disease Classification
 
-<div align="center">
+<p align="center">
 
-### Intelligent Crop Leaf Disease Detection using Deep Learning and Transfer Learning
+### Intelligent Crop Leaf Disease Classification using Deep Learning and Transfer Learning
 
 **Dataset:** PlantVillage  
 **Framework:** PyTorch  
 **Model:** MobileNetV2 (Transfer Learning)
 
-</div>
+</p>
 
 ---
 
 # 📖 Project Overview
 
-SeeIt is a deep learning-based image classification system designed to identify diseases in crop leaves using computer vision techniques. The project leverages the PlantVillage dataset and a pretrained MobileNetV2 model to accurately classify leaf images into healthy or diseased categories.
+**SeeIt** is a deep learning-based computer vision project that aims to automatically identify crop leaf diseases from images using Transfer Learning. The project utilizes the **PlantVillage** dataset and a pretrained **MobileNetV2** model to classify leaf images into healthy or diseased categories.
 
-The primary objective of this project is to build an efficient, lightweight, and scalable disease classification model that can later be integrated into a web application for real-world agricultural use.
+The objective of this project is to build a lightweight, efficient, and scalable disease classification system that can later be deployed as a web application to assist farmers and researchers in early disease detection.
 
 ---
 
-# 🎯 Objectives
+# 🎯 Project Objectives
 
-- Develop an automated crop disease classification system.
-- Reduce dependency on manual disease identification.
-- Utilize Transfer Learning to improve model performance.
-- Compare the effectiveness of different image representations.
-- Build a deployable solution using Streamlit.
+- Build an automated crop disease classification system.
+- Explore and analyze the PlantVillage dataset.
+- Develop a robust image preprocessing pipeline.
+- Apply Transfer Learning using MobileNetV2.
+- Compare the performance of different image representations.
+- Deploy the trained model using Streamlit.
 
 ---
 
 # 🌱 Dataset
 
-The project uses the **PlantVillage Dataset**, one of the most widely used datasets for plant disease classification.
+The project uses the **PlantVillage Dataset**, one of the most popular benchmark datasets for plant disease classification.
 
 ### Dataset Variants
 
@@ -40,18 +41,19 @@ The project uses the **PlantVillage Dataset**, one of the most widely used datas
 - ⚫ Grayscale Images
 - ✂️ Segmented Images
 
-### Dataset Information
+### Dataset Details
 
-- Total Classes: **38**
-- Total Images: **54,000+**
-- Image Format: JPEG
-- Image Size: 256 × 256
+- **Dataset:** PlantVillage
+- **Number of Classes:** 38
+- **Total Images:** 54,000+
+- **Image Format:** JPEG
+- **Original Image Size:** 256 × 256 pixels
 
-During the initial phase, development is performed using the **Color Dataset**, after which the same pipeline will be extended to the Grayscale and Segmented datasets for comparison.
+The implementation begins with the **Color Dataset**, after which the same preprocessing and training pipeline will be extended to the **Grayscale** and **Segmented** datasets for performance comparison.
 
 ---
 
-# 🏗 Project Architecture
+# 🔄 Project Workflow
 
 ```
 PlantVillage Dataset
@@ -60,22 +62,39 @@ PlantVillage Dataset
 Dataset Verification
         │
         ▼
+Exploratory Data Analysis (EDA)
+        │
+        ▼
 Image Preprocessing
         │
-        ▼
-Data Augmentation
+        ├── Resize Images
+        ├── Data Augmentation
+        ├── Tensor Conversion
+        └── Image Normalization
         │
         ▼
-PyTorch Dataset
+PyTorch Dataset & DataLoader
         │
         ▼
-DataLoader
+Transfer Learning using MobileNetV2
         │
         ▼
-MobileNetV2
+Model Training
         │
         ▼
-Disease Prediction
+Model Evaluation
+        │
+        ├── Accuracy
+        ├── Precision
+        ├── Recall
+        ├── F1-Score
+        └── Confusion Matrix
+        │
+        ▼
+Model Testing
+        │
+        ▼
+Grad-CAM Visualization
         │
         ▼
 Streamlit Web Application
@@ -83,78 +102,135 @@ Streamlit Web Application
 
 ---
 
-# ⚙️ Features
+# 📂 Repository Structure
+
+```
+SeeIt-Crop-Disease-Classification/
+│
+├── app/                             # Streamlit web application
+│   ├── app.py
+│   ├── prediction.py
+│   └── utils.py
+│
+├── data/                            # Local dataset (ignored by Git)
+│   ├── color/
+│   ├── grayscale/
+│   └── segmented/
+│
+├── docs/
+│   ├── design_doc.md
+│   └── project_report.pdf
+│
+├── models/                          # Saved trained models
+│   ├── mobilenetv2_best.pth
+│   └── mobilenetv2_final.pth
+│
+├── notebooks/
+│   ├── 01_data_check.ipynb
+│   ├── 02_data_preprocessing.ipynb
+│   ├── 03_mobilenetv2_training.ipynb
+│   ├── 04_model_evaluation.ipynb
+│   ├── 05_gradcam_visualization.ipynb
+│   └── 06_model_testing.ipynb
+│
+├── src/
+│   ├── dataset.py
+│   ├── transforms.py
+│   ├── model.py
+│   ├── train.py
+│   ├── evaluate.py
+│   ├── predict.py
+│   └── utils.py
+│
+├── requirements.txt
+├── README.md
+└── .gitignore
+```
+
+---
+
+# 🚀 Features
 
 - Dataset exploration and verification
+- Class distribution analysis
 - Image preprocessing pipeline
-- Image normalization
 - Data augmentation
-- PyTorch Dataset and DataLoader
+- Image normalization
+- PyTorch Dataset creation
+- DataLoader implementation
 - Transfer Learning using MobileNetV2
+- Model evaluation
 - Disease prediction
-- Lightweight architecture suitable for deployment
+- Streamlit deployment
 
 ---
 
 # 🛠 Technologies Used
 
-| Category | Technologies |
-|----------|--------------|
-| Language | Python |
-| Framework | PyTorch |
+| Category | Technology |
+|-----------|------------|
+| Programming Language | Python |
+| Deep Learning | PyTorch |
 | Computer Vision | TorchVision |
 | Image Processing | PIL (Pillow) |
 | Visualization | Matplotlib |
-| Development | Jupyter Notebook |
+| Development Environment | Jupyter Notebook |
 | Deployment | Streamlit |
+| Version Control | Git & GitHub |
 
 ---
 
-# 📂 Repository Structure
+# 📌 Current Progress
 
+The repository currently includes:
+
+- ✅ Project repository setup
+- ✅ Project architecture
+- ✅ Design documentation
+- ✅ Dataset verification
+- ✅ Dataset exploration
+- ✅ Image preprocessing pipeline
+- ✅ Image augmentation
+- ✅ PyTorch Dataset creation
+- ✅ DataLoader implementation
+
+The remaining modules will be developed and integrated as the project progresses.
+
+---
+
+# 🧠 Deep Learning Approach
+
+The project uses **Transfer Learning** with **MobileNetV2**, a lightweight convolutional neural network pretrained on the ImageNet dataset.
+
+Instead of training a deep neural network from scratch, the pretrained feature extraction layers are reused, while the final classification layer is modified to classify the **38 PlantVillage classes**. This approach reduces training time, improves convergence, and achieves better performance, especially with limited computational resources.
+
+---
+
+# 📦 Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/aash0617/SeeIt-Crop-Disease-Classification.git
 ```
-SeeIt-Crop-Disease-Classification/
 
-│── app/
-│── data/
-│── docs/
-│── models/
-│── notebooks/
-│     ├── 01_data_check.ipynb
-│     ├── 02_data_preprocessing.ipynb
-│
-│── src/
-│── README.md
-│── .gitignore
+Move to the project directory:
+
+```bash
+cd SeeIt-Crop-Disease-Classification
+```
+
+Install the required dependencies:
+
+```bash
+pip install -r requirements.txt
 ```
 
 ---
 
-# ✅ Current Progress
+# 📄 Note
 
-- Repository initialized
-- Project structure created
-- Design documentation completed
-- Dataset verified
-- Image analysis completed
-- Class distribution explored
-- Image preprocessing pipeline implemented
-- Data augmentation pipeline created
-- PyTorch Dataset and DataLoader implemented
-
----
-
-# 🔬 Deep Learning Model
-
-The project utilizes **MobileNetV2**, a lightweight convolutional neural network optimized for efficient image classification.
-
-Instead of training a model from scratch, **Transfer Learning** is employed by using pretrained ImageNet weights and adapting the final classification layer to classify the PlantVillage dataset.
-
----
-
-# 📌 Note
-
-The PlantVillage dataset is **not included** in this repository because of its large size. It is excluded through `.gitignore`.
+The PlantVillage dataset is **not included** in this repository because of its large size. The dataset is stored locally and excluded using the `.gitignore` file.
 
 ---
 
@@ -162,10 +238,10 @@ The PlantVillage dataset is **not included** in this repository because of its l
 
 **Aastha Bhalla**
 
-B.Tech Computer Science Engineering (AI & Data Engineering)
+B.Tech – Computer Science and Engineering (AI & Data Engineering)
 
 Lovely Professional University
 
 ---
 
-## ⭐ If you found this project interesting, consider giving it a star!
+## ⭐ If you found this project interesting, consider giving it a Star!
