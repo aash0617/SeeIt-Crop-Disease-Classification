@@ -4,9 +4,9 @@
 
 ### Intelligent Crop Leaf Disease Classification using Deep Learning and Transfer Learning
 
-**Dataset:** PlantVillage  
+**Dataset:** PlantVillage + Custom Leaf Detector Dataset  
 **Framework:** PyTorch  
-**Model:** MobileNetV2 (Transfer Learning)
+**Models:** MobileNetV2 + Leaf Detector
 
 </p>
 
@@ -14,90 +14,97 @@
 
 # 📖 Project Overview
 
-**SeeIt** is a deep learning-based computer vision project that aims to automatically identify crop leaf diseases from images using Transfer Learning. The project utilizes the **PlantVillage** dataset and a pretrained **MobileNetV2** model to classify leaf images into healthy or diseased categories.
+**SeeIt** is a deep learning-based computer vision application that automatically identifies crop leaf diseases from images.
 
-The objective of this project is to build a lightweight, efficient, and scalable disease classification system that can later be deployed as a web application to assist farmers and researchers in early disease detection.
+The project follows a **two-stage prediction pipeline**:
+
+1. **Leaf Detection**
+   - Determines whether the uploaded image contains a leaf.
+   - Prevents incorrect disease predictions for images that do not contain leaves.
+
+2. **Disease Classification**
+   - If a leaf is detected, the image is classified into one of the **38 PlantVillage disease classes** using a MobileNetV2 transfer learning model.
+
+The application is deployed using **Streamlit**, allowing users to upload an image and receive disease predictions with confidence scores and disease information.
 
 ---
 
 # 🎯 Project Objectives
 
-- Build an automated crop disease classification system.
-- Explore and analyze the PlantVillage dataset.
-- Develop a robust image preprocessing pipeline.
-- Apply Transfer Learning using MobileNetV2.
-- Compare the performance of different image representations.
-- Deploy the trained model using Streamlit.
+- Detect whether an uploaded image contains a plant leaf.
+- Prevent invalid predictions for non-leaf images.
+- Classify crop leaf diseases using Transfer Learning.
+- Build an efficient and lightweight prediction pipeline.
+- Deploy the model using Streamlit.
+- Assist farmers and researchers with early disease identification.
 
 ---
 
-# 🌱 Dataset
+# 🌱 Datasets
 
-The project uses the **PlantVillage Dataset**, one of the most popular benchmark datasets for plant disease classification.
+## 1. PlantVillage Dataset
 
-### Dataset Variants
-
-- 🌈 Color Images
-- ⚫ Grayscale Images
-- ✂️ Segmented Images
+The PlantVillage dataset is used for crop disease classification.
 
 ### Dataset Details
 
-- **Dataset:** PlantVillage
-- **Number of Classes:** 38
-- **Total Images:** 54,000+
-- **Image Format:** JPEG
-- **Original Image Size:** 256 × 256 pixels
+- Dataset: PlantVillage
+- Number of Classes: **38**
+- Total Images: **54,000+**
+- Image Format: JPEG
+- Image Size: 256 × 256
 
-The implementation begins with the **Color Dataset**, after which the same preprocessing and training pipeline will be extended to the **Grayscale** and **Segmented** datasets for performance comparison.
+The disease classifier is trained using the **Color** version of the PlantVillage dataset.
+
+---
+
+## 2. Custom Leaf Detector Dataset
+
+A custom dataset was created for detecting whether an uploaded image contains a leaf.
+
+### Classes
+
+- Leaf
+- Non-Leaf
+
+This model acts as a preprocessing stage before disease prediction.
 
 ---
 
 # 🔄 Project Workflow
 
 ```
-PlantVillage Dataset
+User Uploads Image
         │
         ▼
-Dataset Verification
+Leaf Detector
+        │
+        ├── Non-Leaf
+        │       │
+        │       ▼
+        │  Display:
+        │ "Please upload a leaf image."
         │
         ▼
-Exploratory Data Analysis (EDA)
+Leaf Detected
         │
         ▼
 Image Preprocessing
         │
-        ├── Resize Images
-        ├── Data Augmentation
-        ├── Tensor Conversion
-        └── Image Normalization
+        ▼
+MobileNetV2 Disease Classifier
         │
         ▼
-PyTorch Dataset & DataLoader
+Predicted Disease
         │
         ▼
-Transfer Learning using MobileNetV2
+Confidence Score
         │
         ▼
-Model Training
+Disease Information
         │
         ▼
-Model Evaluation
-        │
-        ├── Accuracy
-        ├── Precision
-        ├── Recall
-        ├── F1-Score
-        └── Confusion Matrix
-        │
-        ▼
-Model Testing
-        │
-        ▼
-Grad-CAM Visualization
-        │
-        ▼
-Streamlit Web Application
+Displayed in Streamlit
 ```
 
 ---
@@ -107,43 +114,35 @@ Streamlit Web Application
 ```
 SeeIt-Crop-Disease-Classification/
 │
-├── app/                             # Streamlit web application
-│   ├── app.py
-│   ├── prediction.py
-│   └── utils.py
+├── app/
+│   └── app.py
 │
-├── data/                            # Local dataset (ignored by Git)
-│   ├── color/
-│   ├── grayscale/
-│   └── segmented/
+├── data/
+│   └── color/
 │
 ├── docs/
-│   ├── design_doc.md
-│   └── project_report.pdf
+│   └── design_doc.md
 │
-├── models/                          # Saved trained models
-│   ├── mobilenetv2_best.pth
-│   └── mobilenetv2_final.pth
+├── models/
+│   ├── leaf_detector.pth
+│   └── mobilenet_plant_disease_new.pth
 │
 ├── notebooks/
 │   ├── 01_data_check.ipynb
 │   ├── 02_data_preprocessing.ipynb
 │   ├── 03_mobilenetv2_training.ipynb
-│   ├── 04_model_evaluation.ipynb
-│   ├── 05_gradcam_visualization.ipynb
-│   └── 06_model_testing.ipynb
+│   ├── 04_prediction.ipynb
+│   └── 05_leaf_detector.ipynb
 │
 ├── src/
-│   ├── dataset.py
-│   ├── transforms.py
-│   ├── model.py
-│   ├── train.py
-│   ├── evaluate.py
+│   ├── disease_info.py
+│   ├── leaf_detector.py
 │   ├── predict.py
-│   └── utils.py
+│   └── preprocess.py
 │
-├── requirements.txt
+├── split_dataset.py
 ├── README.md
+├── requirements.txt
 └── .gitignore
 ```
 
@@ -151,17 +150,15 @@ SeeIt-Crop-Disease-Classification/
 
 # 🚀 Features
 
-- Dataset exploration and verification
-- Class distribution analysis
-- Image preprocessing pipeline
-- Data augmentation
-- Image normalization
-- PyTorch Dataset creation
-- DataLoader implementation
-- Transfer Learning using MobileNetV2
-- Model evaluation
-- Disease prediction
-- Streamlit deployment
+- Leaf vs Non-Leaf Detection
+- Disease Classification
+- Transfer Learning with MobileNetV2
+- Confidence Score Display
+- Disease Information Display
+- Image Upload Interface
+- Streamlit Web Application
+- PyTorch Implementation
+- Custom Leaf Detection Model
 
 ---
 
@@ -172,49 +169,75 @@ SeeIt-Crop-Disease-Classification/
 | Programming Language | Python |
 | Deep Learning | PyTorch |
 | Computer Vision | TorchVision |
-| Image Processing | PIL (Pillow) |
+| Image Processing | Pillow (PIL) |
 | Visualization | Matplotlib |
-| Development Environment | Jupyter Notebook |
-| Deployment | Streamlit |
+| Web Framework | Streamlit |
+| Development | Jupyter Notebook |
 | Version Control | Git & GitHub |
 
 ---
 
-
-
 # 🧠 Deep Learning Approach
 
-The project uses **Transfer Learning** with **MobileNetV2**, a lightweight convolutional neural network pretrained on the ImageNet dataset.
+## Stage 1 – Leaf Detector
 
-Instead of training a deep neural network from scratch, the pretrained feature extraction layers are reused, while the final classification layer is modified to classify the **38 PlantVillage classes**. This approach reduces training time, improves convergence, and achieves better performance, especially with limited computational resources.
+A lightweight binary image classifier determines whether the uploaded image contains:
+
+- Leaf
+- Non-Leaf
+
+If the uploaded image is classified as **Non-Leaf**, disease prediction is stopped and the user is asked to upload a valid leaf image.
+
+---
+
+## Stage 2 – Disease Classifier
+
+The disease classifier uses **Transfer Learning** with **MobileNetV2**, pretrained on ImageNet.
+
+The final classification layer is modified to classify the **38 PlantVillage disease classes**.
+
+This approach provides:
+
+- Faster convergence
+- Better accuracy
+- Lower computational cost
+- Efficient deployment
 
 ---
 
 # 📦 Installation
 
-Clone the repository:
+Clone the repository
 
 ```bash
 git clone https://github.com/aash0617/SeeIt-Crop-Disease-Classification.git
 ```
 
-Move to the project directory:
+Move to the project directory
 
 ```bash
 cd SeeIt-Crop-Disease-Classification
 ```
 
-Install the required dependencies:
+Install the dependencies
 
 ```bash
 pip install -r requirements.txt
+```
+
+Run the Streamlit application
+
+```bash
+streamlit run app/app.py
 ```
 
 ---
 
 # 📄 Note
 
-The PlantVillage dataset is **not included** in this repository because of its large size. The dataset is stored locally and excluded using the `.gitignore` file.
+- The PlantVillage dataset is **not included** in this repository because of its large size.
+- The custom leaf detector dataset is also excluded using `.gitignore`.
+- Both datasets must be downloaded locally before training.
 
 ---
 
@@ -225,6 +248,3 @@ The PlantVillage dataset is **not included** in this repository because of its l
 B.Tech – Computer Science and Engineering (AI & Data Engineering)
 
 Lovely Professional University
-
----
-
