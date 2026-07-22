@@ -233,6 +233,11 @@ streamlit run app/app.py
 
 ---
 
+
+## Live Demo
+
+https://seeit-crop-disease-classification-qtxfptecpnrfzegi6f9mgf.streamlit.app/
+
 # 📄 Note
 
 - The PlantVillage dataset is **not included** in this repository because of its large size.
