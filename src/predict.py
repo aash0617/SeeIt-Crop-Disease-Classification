@@ -3,17 +3,18 @@ import torch.nn as nn
 from torchvision import models
 from pathlib import Path
 
-from src.preprocess import preprocess_image, get_class_names
+from src.preprocess import preprocess_image
+from src.class_names import CLASS_NAMES
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 MODEL_PATH = BASE_DIR / "models" / "mobilenet_plant_disease_new.pth"
-DATASET_PATH = BASE_DIR / "data" / "color"
+
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-class_names = get_class_names(DATASET_PATH)
-num_classes = len(class_names)
+class_names = CLASS_NAMES
+num_classes = len(CLASS_NAMES)
 
 
 def load_model():
